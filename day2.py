@@ -32,6 +32,21 @@ for element in passwords:
         element[0][0] = int(element[0][0])
         element[0][1] = int(element[0][1])
 
-list1.close
+def validpasswordspt2(list):
+    for nlist in list:
+        for element in nlist:
+            # assigns the required numbers to min and max
+            if element == nlist[0]:
+                minnum = element[0]
+                maxnum = element[1]
+                countL = 0
+            # counts the time the required character appears in the password
+            if element == nlist[2]:
+                for character in element:
+                    if character in nlist[1]:
+                        if character == element[minnum] ^ element[maxnum]:
+                            countL += 1
+            return countL
 
 print(validpassword(passwords))
+print(validpasswordspt2(passwords))
