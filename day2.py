@@ -24,6 +24,7 @@ def validpassword(list):
 # puts the information in a nested list
 list1 = open("aoc2input.txt", "r")
 passwords = [line.split() for line in list1]
+list1.close
 
 for element in passwords:
     nums = element[0].split("-")
@@ -33,20 +34,21 @@ for element in passwords:
         element[0][1] = int(element[0][1])
 
 def validpasswordspt2(list):
+    countL = 0
     for nlist in list:
         for element in nlist:
             # assigns the required numbers to min and max
             if element == nlist[0]:
-                minnum = element[0]
-                maxnum = element[1]
-                countL = 0
-            # counts the time the required character appears in the password
-            if element == nlist[2]:
-                for character in element:
-                    if character in nlist[1]:
-                        if character == element[minnum] ^ element[maxnum]:
+                minnum = element[0] - 1
+                maxnum = element[1] - 1
+            # checks to see if the letters are in the correct position
+            elif element == nlist[2]:
+                for character in range(len(element)):
+                    if element[character] in nlist[1]:
+                        if (element[character] == element[minnum]) != (element[character] == element[maxnum]):
                             countL += 1
-            return countL
+                            break
+    return countL
 
-print(validpassword(passwords))
+
 print(validpasswordspt2(passwords))
