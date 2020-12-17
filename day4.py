@@ -4,13 +4,13 @@
 
 import re
 
+# part 1
 with open("aoc4input.txt") as file:
     passports = file.read().split("\n\n")
     passports = [line.replace("\n", " ") for line in passports]
 
 #print(passports)
 
-# part 1
 def validpassports(list):
     count = 0
     requirements = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
@@ -29,7 +29,6 @@ with open("aoc4input.txt") as file:
     passports1 = [dict(pairs.split(":") for pairs in passport if pairs != "") for passport in passports1]
     #print(passports1)
 
-
 def validvalues(list):
     count = 0
     requirements = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
@@ -41,8 +40,8 @@ def validvalues(list):
                     if 2020 <= int(passport["eyr"]) <= 2030:
                         if ("cm" in passport["hgt"] and 150 <= int(passport["hgt"][:-2]) <= 193) or ("in" in passport["hgt"] and 59 <= int(passport["hgt"][:-2]) <= 76):
                             if re.match(r"#[0-9a-f]{6}", passport["hcl"]):
-                                if passport["ecl"] in ecl:
-                                    if re.match(r"^[0-9]{9}$", passport["pid"]):
+                                if re.match(r"^[0-9]{9}$", passport["pid"]):
+                                    if passport["ecl"] in ecl: 
                                         count += 1  
     return count
 
